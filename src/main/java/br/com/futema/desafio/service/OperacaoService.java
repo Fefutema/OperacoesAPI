@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import br.com.futema.desafio.mq.Producer;
 import br.com.futema.desafio.persistencia.model.Operacao;
 import br.com.futema.desafio.persistencia.repository.OperacaoRepository;
-import br.com.futema.desafio.view.SalvarResponseView;
+import br.com.futema.desafio.view.ResponseView;
 
 @Service
 public class OperacaoService {
@@ -21,12 +21,12 @@ public class OperacaoService {
 	@Autowired
 	private Producer producer;
 	
-	public SalvarResponseView enviarFilaSalvar(Operacao operacao) {
+	public ResponseView enviarFilaSalvar(Operacao operacao) {
 		
 		Gson gson = new Gson();
 		producer.addFila(gson.toJson(operacao));
 		
-		SalvarResponseView view = new SalvarResponseView();
+		ResponseView view = new ResponseView();
 		view.setCode(0l);
 		view.setMsg("OK");
 		return view;
